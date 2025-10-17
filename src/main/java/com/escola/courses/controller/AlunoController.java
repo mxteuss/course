@@ -37,11 +37,16 @@ public class AlunoController {
     }
     @PostMapping("/aluno")
     public Aluno postAluno(@RequestBody Aluno aluno){
+
         Curso curso = new Curso();
         curso.setName("Java");
         curso.setPrice(100.00);
-
-        aluno.setCursos((List<Curso>) curso);
+        try {
+            aluno.setCursos((List<Curso>) curso);
+        }
+        catch (ClassCastException e){
+            e.printStackTrace();
+        }
         return alunoRepository.save(aluno);
     }
 }
