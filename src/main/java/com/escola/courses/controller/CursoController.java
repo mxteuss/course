@@ -20,12 +20,12 @@ public class CursoController {
     @Autowired
     private CursoService cursoService;
 
-    @GetMapping("/cursos")
+    @GetMapping("/get")
     public List<Curso> getAllCourses(){
         return cursoRepository.findAll();
     }
 
-    @PostMapping("/cursos")
+    @PostMapping("/post")
     public Curso postCurso(@RequestBody Curso curso){
         return cursoRepository.save(curso);
     }
