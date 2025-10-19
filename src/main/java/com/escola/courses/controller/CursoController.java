@@ -35,4 +35,11 @@ public class CursoController {
     public Curso postCurso(@RequestBody Curso curso){
         return cursoRepository.save(curso);
     }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity delete(@PathVariable Long id){
+        cursoRepository.deleteById(id);
+        return ResponseEntity.ok().build();
+    }
+
 }
