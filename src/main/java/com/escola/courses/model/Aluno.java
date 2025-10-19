@@ -13,13 +13,17 @@ public class Aluno {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    @OneToMany(mappedBy = "alunos", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
+    @ManyToMany
+    @JoinTable(
+        name = "aluno_curso",
+        joinColumns = @JoinColumn(name = "aluno_id"),
+        inverseJoinColumns = @JoinColumn(name = "curso_id"))
     private List<Curso> cursos;
 
     public Aluno() {
     }
 
-    public Aluno(Long id, String name) {
+    public  Aluno(Long id, String name) {
         this.id = id;
         this.name = name;
     }
