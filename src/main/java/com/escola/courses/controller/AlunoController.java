@@ -20,7 +20,8 @@ public class AlunoController {
 
     @Autowired
     private CursoService cursoService;
-
+    @Autowired
+    private CursoRepository cursoRepository;
     @Autowired
     private AlunoRepository alunoRepository;
 
