@@ -42,4 +42,8 @@ public class CursoController {
         return ResponseEntity.ok().build();
     }
 
+    @GetMapping("/free")
+    public ResponseEntity free(){
+        return ResponseEntity.ok(cursoRepository.cursosGratuitos());
+    }
 }
