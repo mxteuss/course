@@ -1,15 +1,23 @@
 package com.escola.courses.controller;
 
 
+import com.escola.courses.model.Aluno;
 import com.escola.courses.model.Curso;
+import com.escola.courses.model.CursoDTO;
+import com.escola.courses.repository.AlunoRepository;
 import com.escola.courses.repository.CursoRepository;
 import com.escola.courses.service.CursoService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.awt.print.Pageable;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 
 @RestController
 @RequestMapping("/cursos")
@@ -20,10 +28,13 @@ public class CursoController {
     private CursoRepository cursoRepository;
     @Autowired
     private CursoService cursoService;
+    @Autowired
+    private AlunoRepository alunoRepository;
 
     @GetMapping("/get")
     public List<Curso> getAllCourses(){
-        return cursoRepository.findAll();
+    Page<Curso> page = cursoRepository.findAll(PageRequest.of(0, 10));
+    return page.getContent();
     }
 
     @GetMapping("/get/{id}")
