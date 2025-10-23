@@ -43,7 +43,17 @@ public class CursoController {
     }
 
     @PostMapping("/post")
-    public Curso postCurso(@RequestBody Curso curso){
+    public Curso postCurso(@RequestBody CursoDTO cursoDTO){
+        Aluno aluno = alunoRepository.findById(cursoDTO.alunoId())
+                .orElseThrow(() -> new RuntimeException("Aluno não encontrado"));
+
+        Curso curso = new Curso();
+
+        curso.setAlunos(new ArrayList<>());
+        curso.getAlunos().add(aluno);
+        curso.setPrice(cursoDTO.price());
+        curso.setName(cursoDTO.name());
+
         return cursoRepository.save(curso);
     }
 
