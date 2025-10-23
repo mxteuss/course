@@ -8,8 +8,9 @@ import com.escola.courses.repository.CursoRepository;
 import com.escola.courses.service.CursoService;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,8 +30,9 @@ public class AlunoController {
     private AlunoRepository alunoRepository;
 
     @GetMapping("/get")
-    public List<Aluno> get(){
-        return alunoRepository.findAll();
+    public List get(){
+        Page<Aluno> page = alunoRepository.findAll(PageRequest.of(0, 10));
+        return page.getContent();
     }
 
     @GetMapping("/get/{}")
